@@ -1,0 +1,11 @@
+# Set the default behavior for all files
+* text=auto
+
+# Set the behavior for XML and DTD files
+*.xml text
+*.dtd text
+
+# Set the behavior for specific files or paths
+src/main/resources/mybatis/FoodDBMapper.xml text
+src/main/resources/mybatis/NoticeMapper.xml text
+src/main/resources/mybatis/mybatis-3-mapper.dtd text

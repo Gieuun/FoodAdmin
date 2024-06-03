@@ -21,6 +21,7 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
@@ -36,6 +37,14 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	//로깅데이터 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-logging'
+	
+	// 서버 mysql버전(8.0.36 우분투) 보다 한계단 높은 버전으로 호환 테스트
+	// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
+	implementation 'com.mysql:mysql-connector-j:8.1.0'
+
 	
 	
 }

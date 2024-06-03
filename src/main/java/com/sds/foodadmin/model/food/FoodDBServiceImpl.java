@@ -16,27 +16,20 @@ public class FoodDBServiceImpl implements FoodDBService {
 	@Override
 	public void insertFoodDB(FoodDB foodDB) {
 		foodDBDAO.insertFoodDB(foodDB);
+		
 	}
 
 	@Override
-	public List selectHighProtein() {
-		return foodDBDAO.selectHighProtein();
+	public List selectAll(FoodDB foodDB) {
+		
+		return foodDBDAO.selectAll(foodDB);
 	}
 
 	@Override
-	public List selectLowSugar() {
-		return foodDBDAO.selectLowSugar();
+	public void updateFoodDB(FoodDB foodDB) {
+		foodDBDAO.updateFoodDB(foodDB);
+		
 	}
 
-	@Override
-	public List selectLowSodium() {
-		// TODO Auto-generated method stub
-		return foodDBDAO.selectLowSodium();
-	}
-
-	@Override
-	public List selectRandomHundred() {
-		return foodDBDAO.selectRandomHundred();
-	}
-
+	
 }
