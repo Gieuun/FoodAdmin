@@ -1,4 +1,4 @@
-package com.sds.foodadmin.apimodule;
+package com.sds.foodadmin.model.food;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sds.foodadmin.domain.FoodDB;
 import com.sds.foodadmin.exception.ApiLoadException;
-import com.sds.foodadmin.model.food.FoodDBServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,10 +48,10 @@ public class FoodDBApiService {
 				if (dataNode != null && dataNode.isArray()) {
 					for (JsonNode item : dataNode) {
 						FoodDB food = new FoodDB();
-						food.setFoodName(item.get("DESC_KOR").asText()); // 음식명
+						food.setFoodname(item.get("DESC_KOR").asText()); // 음식명
 						food.setKcal(item.get("NUTR_CONT1").asInt()); // 열량
 						food.setCarbohydrate(item.get("NUTR_CONT2").asInt()); // 탄수화물
-						food.setProtain(item.get("NUTR_CONT3").asInt()); // 단백질
+						food.setProtein(item.get("NUTR_CONT3").asInt()); // 단백질
 						food.setFat(item.get("NUTR_CONT4").asInt()); // 지방
 						food.setSugar(item.get("NUTR_CONT5").asInt()); // 지방
 						food.setSodium(item.get("NUTR_CONT6").asInt()); // 나트륨

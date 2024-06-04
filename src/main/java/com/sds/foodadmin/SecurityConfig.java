@@ -36,7 +36,8 @@ public class SecurityConfig {
 	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {		 
 	        http
 	            .authorizeHttpRequests(authorize -> authorize	            		
-	            		.requestMatchers("/site/**").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
+	            		.requestMatchers("/static/admin/**").permitAll()	// 사이트 자원 허용
+	            		.requestMatchers("/admin/**").permitAll()	// 사이트 자원 허용
 	            		.requestMatchers("/**").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
 	            		.requestMatchers("/rest/notice/**").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
 	            		.requestMatchers("/").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
