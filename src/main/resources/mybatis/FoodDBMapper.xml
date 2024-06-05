@@ -4,26 +4,24 @@
 
 	<insert id="insertFoodDB"
 		parameterType="com.sds.foodadmin.domain.FoodDB">
-		INSERT INTO foodDB (foodname, kcal, carbohydrate, protein, fat, sugar,
-		sodium)
-		VALUES (#{foodname}, #{kcal}, #{carbohydrate}, #{protein}, #{fat}, #{sugar},
-		#{sodium})
+		INSERT INTO foodDB (foodname, kcal, carbohydrate,
+		protein, fat, sugar, sodium)
+		VALUES (#{foodname}, #{kcal},
+		#{carbohydrate}, #{protein}, #{fat}, #{sugar}, #{sodium})
 	</insert>
 
-	<select id="selectAll">
-		SELECT * FROM foodDB;
+	<select id="selectCount" resultType="int">
+		select count(*) from foodDB
 	</select>
 
-	<update id="updateFoodDB"
-		parameterType="com.sds.foodadmin.domain.FoodDB">
-		UPDATE foodDB SET kcal=#{kcal}, carbohydrate = #{carbohydrate}, protein =
-		#{protein}, fat = #{fat}, sugar = #{sugar}, sodium = #{sodium}
-		WHERE foodIdx = #{foodIdx} AND foodname = #{foodname};
-	</update>
+	<select id="selectAll"
+		resultType="com.sds.foodadmin.domain.FoodDB">
+		SELECT * FROM foodDB
+	</select>
 
 	<delete id="deleteFoodDB"
 		parameterType="com.sds.foodadmin.domain.FoodDB">
-		DELETE FROM foodDB WHERE foodIdx=#{foodIdx} AND foodname = #{foodname};
+		DELETE FROM foodDB
 	</delete>
 
 </mapper>

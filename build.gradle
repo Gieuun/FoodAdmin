@@ -32,7 +32,7 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-j'
+	//runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -44,7 +44,15 @@ dependencies {
 	// 서버 mysql버전(8.0.36 우분투) 보다 한계단 높은 버전으로 호환 테스트
 	// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
 	implementation 'com.mysql:mysql-connector-j:8.1.0'
+	
+	//jsoup을 이용해서 html로 들어오는 api데이터를 json으로 변환하기
+	// https://mvnrepository.com/artifact/org.jsoup/jsoup
+	implementation 'org.jsoup:jsoup:1.15.3'
+		
+	// mysql connector 버전 지정
+	implementation 'com.mysql:mysql-connector-j:8.1.0'
 
+	
 	
 	
 }

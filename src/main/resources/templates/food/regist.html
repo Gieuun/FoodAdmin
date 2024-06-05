@@ -1,34 +1,13 @@
-<%@page import="com.sds.movieadmin.domain.MovieType"%>
-<%@page import="com.sds.movieadmin.domain.Nation"%>
-<%@page import="java.util.List"%>
-<%@ page contentType="text/html;charset=UTF-8"%>
-<%
-	List<Nation> nationList = (List)request.getAttribute("nationList");
-	List<MovieType> movieTypeList = (List)request.getAttribute("movieTypeList");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
-
-	<%@ include file="../inc/header_link.jsp" %>
+  <title>API 데이터 갱신</title>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-	<!-- Preloader -->
-	<%@ include file="../inc/preloader.jsp" %>
-	
-  <!-- Navbar -->
-  <%@ include file="../inc/navi.jsp" %>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-	<%@ include file="../inc/sidebar.jsp" %>
-  
-  <!-- /.sidebar -->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

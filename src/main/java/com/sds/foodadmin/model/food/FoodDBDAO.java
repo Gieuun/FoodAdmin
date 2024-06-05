@@ -7,8 +7,9 @@ import com.sds.foodadmin.domain.FoodDB;
 @Mapper
 public interface FoodDBDAO {
 	public void insertFoodDB(FoodDB foodDB);
-	public List selectAll(FoodDB foodDB);
+	public int selectCount();
+	public List selectAll();
 	public void updateFoodDB(FoodDB foodDB);
-	
+	public void deleteFoodDB();	
 
 }
