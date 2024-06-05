@@ -11,8 +11,14 @@ public class MainController {
 	@GetMapping("/")
 	public String getMain() {
 		log.debug("메인요청함");
-		
+
 		return "index";
+	}
+
+	@GetMapping("/foodapi")
+	public String getApiUpdate() {
+		log.debug("업데이트 하러가기");		
+		return "food/list";	
 	}
 
 }

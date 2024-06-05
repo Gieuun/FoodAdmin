@@ -38,6 +38,8 @@ public class SecurityConfig {
 	            .authorizeHttpRequests(authorize -> authorize	            		
 	            		.requestMatchers("/static/admin/**").permitAll()	// 사이트 자원 허용
 	            		.requestMatchers("/admin/**").permitAll()	// 사이트 자원 허용
+	            		.requestMatchers("/food/**").permitAll()	// 음식관련 템플릿 허용	            		
+	            		.requestMatchers("/apiupdate").permitAll()	// 데이터 갱신 허용
 	            		.requestMatchers("/**").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
 	            		.requestMatchers("/rest/notice/**").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
 	            		.requestMatchers("/").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
