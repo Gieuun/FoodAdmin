@@ -1,9 +1,9 @@
 package com.sds.foodadmin.controller;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.sds.foodadmin.common.Pager;
@@ -15,28 +15,38 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class FoodDBApiController {
+	
+	
 
 	@Autowired
 	private FoodDBService foodDBService;
 
 	@Autowired
 	private Pager pager;
-	
-	//쿼리작동에 문제가 있는 상황
+
+	// 쿼리작동에 문제가 있는 상황
 
 	// Api 에서 제공하는 리스트를 끌어오자
-	@GetMapping("/apiupdate")
-	public String getApiList(FoodDB foodDB, Model model) {
-		//sql 안에서 행 개수를 체크
+	@GetMapping("/api/update")
+	public String getApiList() {
+		List<FoodDB> dataList = foodDBService.selectAll();
+		int count = dataList.size();
 		
-
-		if (count != 0) {					// 행이 1개라도 있으면
-			foodDBService.deleteFoodDB();	// 테이블을 싹 날린다
+		if(count!=0) {
+			foodDBService.deleteFoodDB();
 		}
-		foodDBService.insertFoodDB();		// 테이블에 데이터 넣는다
-		foodDBService.selectAll();			// 생성된 데이터를 다 선택
-
-		return "redirect:food/list";		// 리프레쉬 해준다
+		
+		//데이터 가져오기
+		String data = foodDBService.getData();		
+		log.debug("콘트롤러로 날라오나?============"+data);
+		
+		// 데이터로 FoodDB 객체 만듬
+		List<FoodDB> foodList = foodDBService.createFoodList(data);
+		
+		//FoodDB 객체 데이터베이스에 넣는다
+		foodDBService.insertFoodDB(foodList);
+		
+		return "food/list";
 	}
 
 }

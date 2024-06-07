@@ -17,8 +17,8 @@ public class MainController {
 
 	@GetMapping("/foodapi")
 	public String getApiUpdate() {
-		log.debug("업데이트 하러가기");		
-		return "food/list";	
+		log.debug("음식리스트");
+		return "food/list";
 	}
 
 }

@@ -50,7 +50,12 @@ dependencies {
 	implementation 'org.jsoup:jsoup:1.15.3'
 		
 	// mysql connector 버전 지정
-	implementation 'com.mysql:mysql-connector-j:8.1.0'
+	implementation 'com.mysql:mysql-connector-j:8.0.33'
+	
+	//Json 파싱에 Gson 사용
+	// https://mvnrepository.com/artifact/com.google.code.gson/gson
+	implementation 'com.google.code.gson:gson:2.10.1'
+	
 
 	
 	
