@@ -36,13 +36,13 @@ public class SecurityConfig {
 	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {		 
 	        http
 	            .authorizeHttpRequests(authorize -> authorize	            		
-	            		.requestMatchers("/static/admin/**").permitAll()	// 사이트 자원 허용
-	            		.requestMatchers("/admin/**").permitAll()	// 사이트 자원 허용
-	            		.requestMatchers("/food/**").permitAll()	// 음식관련 템플릿 허용	            		
-	            		.requestMatchers("/api/**").permitAll()	// 데이터 갱신 허용
-	            		.requestMatchers("/**").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
+	            		.requestMatchers("/static/admin/**").permitAll()// 사이트 자원 허용
+	            		.requestMatchers("/admin/**").permitAll()		// 사이트 자원 허용
+	            		.requestMatchers("/food/**").permitAll()		// 음식관련 템플릿 허용	            		
+	            		.requestMatchers("/foodList").permitAll()		// 음식리스트 호출 허용
+	            		.requestMatchers("/**").permitAll()				// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
 	            		.requestMatchers("/rest/notice/**").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
-	            		.requestMatchers("/").permitAll()	// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
+	            		.requestMatchers("/").permitAll()				// 모든 요청을 인증 없이 허용. 결과물 나오면 수정필요!
 	            		
 	                .anyRequest().authenticated()             		// 그 외의 요청은 인증 필요
 	            )

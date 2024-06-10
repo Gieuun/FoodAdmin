@@ -27,8 +27,9 @@ public class FoodDBApiController {
 	// 쿼리작동에 문제가 있는 상황
 
 	// Api 에서 제공하는 리스트를 끌어오자
-	@GetMapping("/api/update")
+	@GetMapping("food/update")
 	public String getApiList() {
+		
 		List<FoodDB> dataList = foodDBService.selectAll();
 		int count = dataList.size();
 		

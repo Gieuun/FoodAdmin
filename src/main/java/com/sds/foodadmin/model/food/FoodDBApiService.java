@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sds.foodadmin.domain.FoodDB;
@@ -37,8 +35,6 @@ public class FoodDBApiService implements FoodDBService {
 	String jsonString;
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
-	
-	
 
 	public String getData() {
 		jsonString = "";
@@ -50,7 +46,7 @@ public class FoodDBApiService implements FoodDBService {
 			StringBuilder stringBuilder = new StringBuilder(urlFrame); // URL헤드
 			stringBuilder.append(key); // 키값 : key 못불러와서 수동맵핑. 나중에 수정
 			stringBuilder.append("/I2790/json/1"); // 서비스코드 + 객체형테 + 1번째 콘텐츠 호출
-			stringBuilder.append("/10"); // 1번 호출 시 999개 호출할 수 있음 (변수)
+			stringBuilder.append("/999"); // 1번 호출 시 999개 호출할 수 있음 (변수)
 			URL url = new URL(stringBuilder.toString());
 			log.debug("조립한 url은" + url);
 
@@ -88,8 +84,6 @@ public class FoodDBApiService implements FoodDBService {
 
 		return jsonString;
 	}
-	
-	
 
 	@Override
 	public List<FoodDB> createFoodList(String jsonString) {
@@ -113,19 +107,34 @@ public class FoodDBApiService implements FoodDBService {
 							&& jsonObject.has("NUTR_CONT5") && jsonObject.has("NUTR_CONT6")) {
 
 						String foodname = jsonObject.get("DESC_KOR").asText(); // 음식명
-						float kcal = jsonObject.has("NUTR_CONT1") ? (float) jsonObject.get("NUTR_CONT1").asDouble()
-								: 0.0f; // 열량
-						float carbohydrate = jsonObject.has("NUTR_CONT2")
-								? (float) jsonObject.get("NUTR_CONT2").asDouble()
-								: 0.0f; // 탄수화물
-						float protein = jsonObject.has("NUTR_CONT3") ? (float) jsonObject.get("NUTR_CONT3").asDouble()
-								: 0.0f; // 단백질
-						float fat = jsonObject.has("NUTR_CONT4") ? (float) jsonObject.get("NUTR_CONT4").asDouble()
-								: 0.0f; // 지방
-						float sugar = jsonObject.has("NUTR_CONT5") ? (float) jsonObject.get("NUTR_CONT5").asDouble()
-								: 0.0f; // 당류
-						float sodium = jsonObject.has("NUTR_CONT6") ? (float) jsonObject.get("NUTR_CONT6").asDouble()
-								: 0.0f; // 나트륨
+
+						// Node에 2차 파싱해서 Null값을 체크해준다
+						// null이 있으면 결과 객체에 대한 신뢰도가 떨어짐
+						// 필수값을 모두 만족하는 객체만을 입력하도록 하자
+						JsonNode nutrNode1 = jsonObject.get("NUTR_CONT1");
+						JsonNode nutrNode2 = jsonObject.get("NUTR_CONT2");
+						JsonNode nutrNode3 = jsonObject.get("NUTR_CONT3");
+						JsonNode nutrNode4 = jsonObject.get("NUTR_CONT4");
+						JsonNode nutrNode5 = jsonObject.get("NUTR_CONT5");
+						JsonNode nutrNode6 = jsonObject.get("NUTR_CONT6");
+
+						if ((nutrNode1.isNull() || nutrNode1.asInt() == 0)
+								&& (nutrNode2.isNull() || nutrNode2.asInt() == 0)
+								&& (nutrNode3.isNull() || nutrNode3.asInt() == 0)
+								&& (nutrNode4.isNull() || nutrNode4.asInt() == 0)
+								&& (nutrNode5.isNull() || nutrNode5.asInt() == 0)
+								&& (nutrNode6.isNull() || nutrNode6.asInt() == 0)) {
+							log.debug("필수값 중 null 또는 0이 존재해 객체를 건너뜁니다");
+							continue;
+						}
+
+						// 각 필드 파싱
+						float kcal = (float) nutrNode1.asDouble();
+						float carbohydrate = (float) nutrNode2.asDouble();
+						float protein = (float) nutrNode3.asDouble();
+						float fat = (float) nutrNode4.asDouble();
+						float sugar = (float) nutrNode5.asDouble();
+						float sodium = (float) nutrNode6.asDouble();
 
 						// FoodDB 객체 생성
 						FoodDB foodDB = new FoodDB();

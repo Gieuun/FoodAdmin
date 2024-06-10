@@ -30,7 +30,7 @@
 					<div class="row mb-1">
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="/api/update">DB 업데이트</a></li>								
+								<li class="breadcrumb-item"><a href="food/update">DB 업데이트</a></li>								
 							</ol>
 						</div>						
 					</div>
@@ -80,21 +80,20 @@
 												
 											</tr>
 										</thead>
-										<tbody>
-											<!--
-											<%for(int i=0;i
-											<movieList.size();i++){%> <%Movie movie =
-											movieList.get(i); %>  
-											<tr>
-												<td><%=i%></td>
-												<td><%=movie.getMovieCd()%></td>
-												<td><%=movie.getMovieNm() %></td>
-												<td><%=movie.getTypeNm() %></td>
-												<td><%=movie.getNationAlt() %></td>
-												<td><%=movie.getPrdtYear() %></td>
-											</tr>
-											<%} %> 
-											-->
+										<tbody>		
+																		
+											<!--FoodDB를 호출하는 테이블  -->
+											<tr th:each="foodDB : ${foodList}">		
+												<td th:text="${foodDB.foodIdx}"></td>
+												<td th:text="${foodDB.foodname}"></td>
+												<td th:text="${foodDB.kcal}"></td>												
+												<td th:text="${foodDB.carbohydrate}"></td>												
+												<td th:text="${foodDB.protein}"></td>												
+												<td th:text="${foodDB.fat}"></td>												
+												<td th:text="${foodDB.sugar}"></td>												
+												<td th:text="${foodDB.sodium}"></td>												
+											</tr>									 
+											<!--FoodDB를 호출 테이블 끝  -->
 										</tbody>
 									</table>
 								</div>
