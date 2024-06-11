@@ -5,12 +5,10 @@
 	<insert id="insertFoodDB" parameterType="java.util.List">
 		INSERT INTO foodDB (foodname, kcal, carbohydrate, protein, fat, sugar,
 		sodium) VALUES
-
-		<foreach collection="list" item="food" separator=",">
-			(#{food.foodname}, #{food.kcal}, #{food.carbohydrate},
-			#{food.protein}, #{food.fat}, #{food.sugar}, #{food.sodium})
+		<foreach collection="list" item="foodDB" separator=",">
+			(#{foodDB.foodname}, #{foodDB.kcal}, #{foodDB.carbohydrate},
+			#{foodDB.protein}, #{foodDB.fat}, #{foodDB.sugar}, #{foodDB.sodium})
 		</foreach>
-
 	</insert>
 
 	<select id="select" resultType="com.sds.foodadmin.domain.FoodDB">
@@ -23,8 +21,7 @@
 		SELECT * FROM foodDB
 	</select>
 
-	<delete id="deleteFoodDB"
-		parameterType="com.sds.foodadmin.domain.FoodDB">
+	<delete id="deleteFoodDB">
 		DELETE FROM foodDB
 	</delete>
 
