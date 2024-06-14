@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>글쓰기</title>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS 추가 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<br><br><br><br><br><br>
+
+<div class="container">
+    <h2>글쓰기</h2>
+    <form id="editForm" action="/notice/edit" method="post">
+        <input type="hidden" name="noticeIdx" th:value="${notice.noticeIdx}">
+
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" class="form-control" name="title" id="title" th:value="${notice.title}">
+        </div>
+
+        <div class="form-group">
+            <label for="writer">작성자</label>
+            <input type="text" class="form-control" name="writer" th:value="${notice.writer}">
+        </div>
+
+        <div class="form-group">
+            <label for="content">내용:</label><br>
+            <textarea id="content" class="form-control" name="content" rows="15" th:text="${notice.content}"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">수정</button>
+    </form>
+</div>
+
+<br><br><br><br><br><br>
+
+<!-- Bootstrap JS 및 Popper.js 추가 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<script>
+  $('#editForm').submit(function(event) {
+      // 제목이 비어있는지 확인
+      if ($('#title').val().trim() === "") {
+          alert("제목을 입력해주세요");
+          $('#title').focus();
+          return false; // 폼 제출 중단
+      }
+
+      // 내용이 비어있는지 확인
+      if ($('#content').val().trim() === "") {
+          alert("내용을 입력해주세요");
+          $('#content').focus();
+          return false; // 폼 제출 중단
+      }
+
+      // 수정 확인 창 띄우기
+      var confirmEdit = confirm("수정하시겠습니까?");
+      if (!confirmEdit) {
+          event.preventDefault(); // 기본 동작 중단
+      }
+  });
+</script>
+</body>
+</html>

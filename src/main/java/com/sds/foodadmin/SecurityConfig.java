@@ -53,6 +53,7 @@ public class SecurityConfig {
 	            .httpBasic(httpBasic -> httpBasic
 	                .realmName("FoodFit")                      		// 기본 인증 사용 시 realm 이름 설정
 	            );
+	        http.csrf((auth) -> auth.disable());
 	        return http.build();
 	    }
 }

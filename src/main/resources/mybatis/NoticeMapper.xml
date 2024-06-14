@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
-<mapper namespace="com.sds.foodfit.model.notice.NoticeDAO">
+<mapper namespace="com.sds.foodadmin.model.notice.NoticeDAO">
 
 	<select id="getTotalCount" resultType="int">
 		select count(*) from notice
 	</select>
 	
 	<select id="selectAll" resultType="Notice" parameterType="java.util.Map">
-    select * from notice order by regdate desc limit #{startIndex}, #{rowCount}
+    	select * from notice order by regdate desc limit #{startIndex}, #{rowCount}
 </select>
 	
 	<insert id="insert" parameterType="Notice">
@@ -32,12 +32,18 @@
 		update notice set hit = hit + 1 where noticeIdx = #{noticeIdx}
 	</update>
 	
-	
-	<select id="searchNoticesByTitle" resultType="Notice" parameterType="java.util.Map">
-    SELECT * FROM notice 
-    WHERE title LIKE CONCAT('%', #{query}, '%')
-    ORDER BY regdate DESC
-    LIMIT #{startIndex}, #{rowCount}
-</select>
+	<!-- 검색된 데이터를 가져오는 쿼리 -->
+    <select id="searchNoticesByTitle" resultType="Notice" parameterType="java.util.Map">
+        SELECT * FROM notice 
+        WHERE title LIKE CONCAT('%', #{titleKeyword}, '%')
+        ORDER BY noticeIdx DESC 
+        LIMIT #{startIndex}, #{rowCount}
+    </select>
+
+    <!-- 검색된 공지사항의 총 개수를 가져오는 쿼리 페이징처리를 위해 전체 레코드 수를 반환 -->
+    <select id="getTotalCountByQuery" resultType="int" parameterType="string">
+        SELECT COUNT(*) FROM notice 
+        WHERE title LIKE CONCAT('%', #{titleKeyword}, '%')
+    </select>
 
 </mapper>

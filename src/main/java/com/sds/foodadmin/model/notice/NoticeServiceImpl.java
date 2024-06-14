@@ -10,18 +10,24 @@ import com.sds.foodadmin.domain.Notice;
 import com.sds.foodadmin.exception.NoticeException;
 
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
-	
+
 	@Override
 	public int getTotalCount() {
 		return noticeDAO.getTotalCount();
+
 	}
 
 	@Override
-	public List<Notice> selectAll(Map<String, Integer> map) {
+	public int getTotalCountByQuery(String titleKeyword) {
+		return noticeDAO.getTotalCountByQuery(titleKeyword);
+	}
+
+	@Override
+	public List<Notice> getAllNotices(Map<String, Integer> map) { 
 		return noticeDAO.selectAll(map);
 	}
 
@@ -29,21 +35,21 @@ public class NoticeServiceImpl implements NoticeService{
 	public Notice select(int noticeIdx) {
 		noticeDAO.updateHit(noticeIdx);
 		Notice notice = noticeDAO.select(noticeIdx);
+		if (notice == null) {
+			throw new NoticeException("글 불러오기 실패");
+		}
 		return notice;
 	}
 
 	@Override
 	public void insert(Notice notice) {
-		int result = noticeDAO.insert(notice);
-		if(result<1) {
-			throw new NoticeException("글 등록 실패");
-		}
+		noticeDAO.insert(notice);
 	}
 
 	@Override
 	public void update(Notice notice) {
 		int result = noticeDAO.update(notice);
-		if(result<1) {
+		if (result < 1) {
 			throw new NoticeException("글 수정 실패");
 		}
 	}
@@ -51,13 +57,14 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public void delete(Notice notice) {
 		int result = noticeDAO.delete(notice);
-		if(result<1) {
+		if (result < 1) {
 			throw new NoticeException("글 삭제 실패");
 		}
 	}
-	 @Override
-	    public List<Notice> searchNoticesByTitle(Map<String, Object> map) {
-	        return noticeDAO.searchNoticesByTitle(map);
-	    }
+
+	@Override
+	public List<Notice> searchNoticesByTitle(Map<String, Object> map) { 
+		return noticeDAO.searchNoticesByTitle(map);
+	}
 
 }
