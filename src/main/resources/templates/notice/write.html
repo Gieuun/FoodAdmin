@@ -40,6 +40,7 @@
 		<div class="form-group">
             <label for="writer">작성자</label>
             <input type="text" class="form-control" name="writer" placeholder="작성자를 입력하세요">
+            <div class="error-message" id="writerError"></div>
         </div>
         
         <div class="form-group">
@@ -48,9 +49,9 @@
             <div class="error-message" id="contentError"></div>
         </div>
 
-        <button type="button" id="submitBtn" class="btn btn-primary" style="margin-right: 87%;">글쓰기</button>
-        <button class="btn btn-primary" onclick="location.href='/notice'">목록</button>
+        <button type="button" id="submitBtn" class="btn btn-primary">글쓰기</button>
     </form>
+    <button class="btn btn-primary" id="bt_list">목록</button>
 </div>
 
 <br><br><br><br><br><br>
@@ -85,6 +86,13 @@
             $('#titleError').text('');
             $('input[name="title"]').removeClass('error-input');
         }
+        if (errors.writer) {
+            $('#writerError').text(errors.writer);
+            $('input[name="writer"]').addClass('error-input');
+        } else {
+            $('#writerError').text('');
+            $('input[name="writer"]').removeClass('error-input');
+        }
         if (errors.content) {
             $('#contentError').text(errors.content);
         } else {
@@ -92,5 +100,9 @@
         }
       }
     });
+  });
+  
+  $("#bt_list").click(function(){
+      window.location.href = "/notice";
   });
 </script>

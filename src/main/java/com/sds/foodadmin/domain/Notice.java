@@ -15,6 +15,7 @@ public class Notice {
 	@Size(min = 5, max = 100, message = "제목은 5글자에서 100글자 사이로 입력해주세요.")
 	private String title; // 제목
 
+	@NotBlank(message = "작성자를 입력해주세요.")
 	private String writer; // 작성자
 
 	@NotBlank(message = "내용을 입력해주세요.")
