@@ -15,6 +15,10 @@
 		SELECT * FROM foodDB WHERE
 		foodIdx = #{foodIdx}
 	</select>
+  
+    <select id="countMember" resultType="int">
+      select count(*) as memberCount from member
+    </select>
 
 	<select id="selectAll"
 		resultType="com.sds.foodadmin.domain.FoodDB">
