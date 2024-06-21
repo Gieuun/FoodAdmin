@@ -47,8 +47,7 @@
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">상세정보<i class="fas fa-arrow-circle-right"></i></a>
+                                </div>                                
                             </div>
                         </div>
                         <!-- ./col -->
@@ -56,30 +55,17 @@
                             <!-- 작은 박스 -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>44</h3>
+                                    <h3>
+                                        <span id="countMember" style="font-size: 38px">명</span>
+                                    </h3>
                                     <p>총 회원수</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">상세정보<i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- 작은 박스 -->
-                            <div class="small-box bg-danger">
-                                <div class="inner">
-                                    <h3>65</h3>
-                                    <p>유저분석</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">상세정보<i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
+                        <!-- ./col -->                        
                     </div>
                     <!-- .row -->
                     <!-- 메인 로우 -->
@@ -92,48 +78,7 @@
                         <!-- 오른쪽 칼럼 (위젯 정렬 가능하게 ID 추가) -->
                     </div>
                     <!-- .row (main row) -->
-                    <!-- 실질적인 판매 그래프 -->
-                    <div class="card bg-gradient-info">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">
-                                <i class="fas fa-th mr-1"></i> 사용비중
-                            </h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <canvas class="chart" id="line-chart" style="min-height: 100px; height: 100px; max-height: 100px; max-width: 100%;"></canvas>
-                        </div>
-                        <!-- .card-body -->
-                        <div class="card-footer bg-transparent">
-                            <div class="row">
-                                <div class="col-4 text-center">
-                                    <input type="text" class="knob" data-readonly="true" value="50" data-width="80" data-height="80" data-fgColor="#39CCCC">
-                                    <div class="text-white">데모체험</div>
-                                </div>
-                                <!-- ./col -->
-                                <div class="col-4 text-center">
-                                    <input type="text" class="knob" data-readonly="true" value="30" data-width="80" data-height="80" data-fgColor="#39CCCC">
-                                    <div class="text-white">음식추천</div>
-                                </div>
-                                <!-- ./col -->
-                                <div class="col-4 text-center">
-                                    <input type="text" class="knob" data-readonly="true" value="20" data-width="80" data-height="80" data-fgColor="#39CCCC">
-                                    <div class="text-white">밥상진단</div>
-                                </div>
-                                <!-- ./col -->
-                            </div>
-                            <!-- .row -->
-                        </div>
-                        <!-- .card-footer -->
-                    </div>
-                    <!-- .card -->
+
                 </div>
                 <!-- .container-fluid -->
             </section>
@@ -161,4 +106,11 @@
             document.getElementById('visitorCount').innerText = data;
         })
         .catch(error => console.error('Error fetching visitor count:', error));
+    
+    fetch('/api/countMember')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('countMember').innerText = data;
+    })
+    .catch(error => console.error('Error fetching visitor count:', error));
 </script>

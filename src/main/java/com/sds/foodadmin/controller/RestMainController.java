@@ -4,17 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sds.foodadmin.common.VisitorCounter;
+import com.sds.foodadmin.common.DashBoardCounter;
 
 @RestController
 public class RestMainController {
 
     @Autowired
-    private VisitorCounter visitorCounter;
+    private DashBoardCounter dashBoardCounter;
 
     @GetMapping("/api/visitorCount")
     public int getVisitorCount() {
-	return visitorCounter.countVisitors();
+	return dashBoardCounter.countVisitors();
+    }
+
+    @GetMapping("/api/countMember")
+    public int getCountMember() {
+	return dashBoardCounter.countMembers();
     }
 
 }

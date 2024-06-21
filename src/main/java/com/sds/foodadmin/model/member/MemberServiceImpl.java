@@ -1,73 +1,23 @@
 package com.sds.foodadmin.model.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sds.foodadmin.domain.Member;
-import com.sds.foodadmin.domain.MemberDetail;
-import com.sds.foodadmin.domain.Role;
-import com.sds.foodadmin.domain.Sns;
-import com.sds.foodadmin.exception.MemberException;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
-	@Autowired
-	private SnsDAO snsDAO;
-	
-	@Autowired
-	private RoleDAO roleDAO;
-	
-	@Autowired
-	private MemberDAO memberDAO;
-	
-	@Autowired
-	private MemberDetailDAO memberDetailDAO;
-	
+    @Autowired
+    private MemberDAO memberDAO;
 
-	@Autowired
-	private	PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private HttpSession session;
-	
-
-	@Transactional
-	public void regist(Member member) throws MemberException {
-		Sns sns = snsDAO.selectByName(member.getSns().getSnsName());
-		member.setSns(sns); //sns_idx가 채워진 DTO를 다시 MemberDTO 에 대입
-		
-		Role role = roleDAO.selectByName(member.getRole().getRoleName());
-		member.setRole(role); //role_idx가 채워진 DTO를 다시 MemberDTO 에 대입
-		
-		int result = memberDAO.insert(member);
-		
-		if(result <1) {
-			throw new MemberException("회원 등록 실패");
-		}
-		
-		if(sns.getSnsName().equals("homepage")) {
-			MemberDetail memberDetail = member.getMemberDetail();
-			memberDetail.setMember(member);
-			
-			log.debug("member result is"+result);
-			
-			member.setPwd(passwordEncoder.encode(member.getPwd()));
-			
-			result = memberDetailDAO.insert(memberDetail);
-			if(result <1){
-				throw new MemberException("회원 추가정보 등록 실패");
-			}
-		}
-	}
-	public Member selectByid(String id) {
-		return memberDAO.selectByid(id);
-	}
-
+    public List<Member> selectAll() {
+	log.debug("서비스 들어왔음");
+	return memberDAO.selectAll();
+    };
 }

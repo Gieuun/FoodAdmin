@@ -1,0 +1,81 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1"
+>
+<title>회원 목록</title>
+<style>
+table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		width: 100%;
+		border: 1px solid #ddd;
+}
+
+th, td {
+		text-align: left;
+		padding: 8px;
+}
+
+.hidden-header {
+		display: none;
+}
+
+tr:nth-child(even) {
+		background-color: #f2f2f2
+}
+</style>
+<th:block th:include="/fragments/header_link :: header_link"></th:block>
+</head>
+<body>
+		<!-- Preloader -->
+		<th:block th:include="/fragments/preloader :: preloader"></th:block>
+		<!-- Navbar -->
+		<th:block th:include="/fragments/navi :: navi"></th:block>
+		<!-- /.navbar -->
+		<!-- Main Sidebar Container -->
+		<th:block th:include="fragments/sidebar :: sidebar"></th:block>
+		<div class="wrapper">
+				<div class="content-wrapper">
+						<div style="margin-left: 20px; margin-right: 20px;">
+								<h2>회원 리스트</h2>
+								<div style="overflow-x: auto;">
+										<table>
+												<tr>
+														<th class="hidden-header">No</th>
+														<th>이름</th>
+														<th>ID</th>
+														<th class="hidden-header">비밀번호</th>
+														<th>이메일</th>
+														<th>성별</th>
+														<th>나이</th>
+														<th>키</th>
+														<th>몸무게</th>
+														<th>가입유형</th>
+														<th>권한</th>
+												</tr>
+												<tr th:each="member : ${memberList}">
+														<td class="hidden-header" th:text="${member.memberIdx}"></td>
+														<td th:text="${member.name}"></td>
+														<td th:text="${member.id}"></td>
+														<td class="hidden-header" th:text="${member.pwd}"></td>
+														<td th:text="${member.email}"></td>
+														<td th:text="${member.gender}"></td>
+														<td th:text="${member.age}"></td>
+														<td th:text="${member.height}"></td>
+														<td th:text="${member.weight}"></td>
+														<td th:text="${member.sns.snsName}"></td>
+														<td th:text="${member.role.roleName}"></td>
+														
+												</tr>
+										</table>
+								</div>
+						</div>
+				</div>
+		</div>
+		<th:block th:include="/fragments/footer :: footer"></th:block>
+		<th:block th:include="/fragments/footer_link :: footer_link"></th:block>
+</body>
+</html>
