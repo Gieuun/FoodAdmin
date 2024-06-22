@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!-- header_link begin -->
+	<th:block th:include="/fragments/header_link :: header_link"></th:block>
+    <!-- header_link end -->
 <head>
     <title>글쓰기</title>
     <meta charset="UTF-8">
@@ -20,7 +23,17 @@
     </style>
 </head>
 <body>
-<br><br><br>
+<!-- Preloader -->
+	<th:block th:include="/fragments/preloader :: preloader"></th:block>
+
+	<!-- Navbar -->
+	<th:block th:include="/fragments/navi :: navi"></th:block>
+	<!-- /.navbar -->
+
+	<!-- Main Sidebar Container -->
+	<th:block th:include="fragments/sidebar :: sidebar"></th:block>
+	<!-- /.sidebar -->
+	<!-- End All Pages -->
 
 <div class="container">
     <h2>글쓰기</h2>
@@ -51,10 +64,11 @@
 
         <button type="button" id="submitBtn" class="btn btn-primary">글쓰기</button>
     </form>
-    <button class="btn btn-primary" id="bt_list">목록</button>
+    <button class="btn btn-custom" onclick="history.back()">목록</button>
 </div>
 
-<br><br><br><br><br><br>
+<th:block th:include="/fragments/footer :: footer"></th:block>
+	<th:block th:include="/fragments/footer_link :: footer_link"></th:block>
 
 
 </body>

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!-- header_link begin -->
+	<th:block th:include="/fragments/header_link :: header_link"></th:block>
+    <!-- header_link end -->
 <head>
-    <title>글쓰기</title>
+    <title>글수정</title>
     <meta charset="UTF-8">
     <!-- Bootstrap CSS 추가 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -9,10 +12,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-<br><br><br><br><br><br>
+<!-- Preloader -->
+	<th:block th:include="/fragments/preloader :: preloader"></th:block>
+
+	<!-- Navbar -->
+	<th:block th:include="/fragments/navi :: navi"></th:block>
+	<!-- /.navbar -->
+
+	<!-- Main Sidebar Container -->
+	<th:block th:include="fragments/sidebar :: sidebar"></th:block>
+	<!-- /.sidebar -->
+	<!-- End All Pages -->
 
 <div class="container">
-    <h2>글쓰기</h2>
+    <h2>글수정</h2>
     <form id="editForm" action="/notice/edit" method="post">
         <input type="hidden" name="noticeIdx" th:value="${notice.noticeIdx}">
 
@@ -32,11 +45,13 @@
         </div>
 
         <button type="submit" class="btn btn-primary">수정</button>
+        
     </form>
 </div>
 
-<br><br><br><br><br><br>
 
+<th:block th:include="/fragments/footer :: footer"></th:block>
+	<th:block th:include="/fragments/footer_link :: footer_link"></th:block>
 <!-- Bootstrap JS 및 Popper.js 추가 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
