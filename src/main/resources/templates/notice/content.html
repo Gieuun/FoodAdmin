@@ -49,16 +49,19 @@
     <div class="notice-title">
         <h3 th:text="${notice.title}"></h3>
     </div>
+    <hr>
     <div class="notice-meta">
         <span>등록일: <span th:text="${notice.regdate}"></span></span>
         <span class="ml-4">작성자: <span th:text="${notice.writer}"></span></span>
         <span class="ml-4">조회수: <span th:text="${notice.hit}"></span></span>
     </div>
+    <hr>
     <div class="notice-content" th:utext="${notice.content}">
 
     </div>
     <div class="notice-footer">
-        <button class="btn btn-custom" onclick="location.href='/notice'">목록</button>
+    <hr>
+        <button class="btn btn-custom" onclick="history.back()">목록</button>
             <form id="deleteForm" action="/notice/del" method="post" style="display: inline;" onsubmit="return confirmDelete();">
                 <input type="hidden" name="noticeIdx" th:value="${notice.noticeIdx}">
                 <button type="submit" class="btn btn-custom">삭제</button>

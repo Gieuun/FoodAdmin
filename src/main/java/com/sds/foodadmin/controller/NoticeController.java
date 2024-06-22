@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sds.foodadmin.common.Pager;
-import com.sds.foodadmin.controller.NoticeController;
 import com.sds.foodadmin.domain.Notice;
 import com.sds.foodadmin.exception.NoticeException;
 import com.sds.foodadmin.model.notice.NoticeService;
